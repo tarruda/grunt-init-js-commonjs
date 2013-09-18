@@ -1,17 +1,16 @@
 require('source-map-support').install()
 global.expect = require('chai').expect
 
-t = require('../src')
+###
+ The object passed to 'run' will be processed similarly to mocha exports
+ interface, the difference is that its possible to prefix test/suite names with
+ 'only:' and 'skip:' to isolate/skip that test/suite.
+###
 
-# The 'suite' object will be processed and run as a mocha suite like mocha
-# exports interface, the difference is that its possible to prefix test/suite
-# names with 'only:' and 'skip:' to have the same effect as
-# {it,describe}.{only,skip}.
-
-suite =
+run(
   'Suite':
     before: (done) ->
-      @t = t
+      @t = require('../src')
       done()
 
 
@@ -23,6 +22,4 @@ suite =
       'async test': (done) ->
         expect(@t).to.be.true
         done()
-
-
-run(suite)
+)
