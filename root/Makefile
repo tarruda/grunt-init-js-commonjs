@@ -12,6 +12,6 @@ deps: grunt-cli
 	npm install
 
 test: deps
-	$(GRUNT_CLI) test
+	$(GRUNT_CLI)
 
 .PHONY: grunt-cli deps test all
