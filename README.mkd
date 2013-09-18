@@ -1,0 +1,19 @@
+Grunt init template for generating projects that will have:
+
+- coffescript
+- source maps
+- commonjs
+- umd
+- mocha(node and phantomjs)
+- browserify
+
+Instructions:
+
+```sh
+npm install -g grunt-init
+git clone git://github.com/tarruda/grunt-init-umd-commonjs-coffee ~/.grunt-init/umd-commonjs-coffee
+mkdir project_name
+cd project_name
+grunt-init umd-commonjs-coffee
+npm install
+```
