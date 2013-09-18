@@ -1,0 +1,34 @@
+# {%= name %}
+
+> {%= description %} 
+
+## Installation
+```shell
+npm install {%= name %}
+```
+
+### Development
+
+Ensure grunt-cli exists in your $PATH:
+```sh
+npm install -g grunt-cli
+```
+
+Clone the repository, install dependencies, run tests and watch for changes:
+
+```sh
+git clone {%= repository %}
+cd {%= name %}
+npm install 
+grunt 
+```
+
+If you want to install a development branch of this package from NPM, it will be
+necessary to rebuild after install. Eg:
+
+```sh
+npm install {%= repository %}#master
+cd node_modules/{%= name %}
+npm install
+grunt clean build
+```
