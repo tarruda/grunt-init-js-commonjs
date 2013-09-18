@@ -38,22 +38,26 @@ module.exports = (grunt) ->
           listenPort: 8000
           phantomjs: true
           src: ['build/browser/test.js']{% } %}
-
+    {% if (browser) { %}
+    uglify:
+      options:
+        sourceMap: 'build/browser/<%= pkg.name %>.min.js.map'
+        sourceMapIn: 'build/browser/<%= pkg.name %>.js.map'
+      files:
+        src: 'build/browser/<%= pkg.name %>.js'
+        dest: 'build/browser/<%= pkg.name %>.min.js'
+    {% } %}
     watch:
       options:
         nospawn: true
       all:
         files: ['Gruntfile.coffee', 'src/**/*.coffee', 'test/**/*.coffee']
         tasks: [
-          'coffeelint'
-          'coffee_build'{% if (browser) { %}
+          'test'{% if (browser) { %}
           'livereload'{% } %}
-          'mocha_debug'
         ]
 
-    clean:
-      all:
-        ['build'])
+    clean: ['build'])
 
   grunt.event.on('watch', (action, filepath) ->
     grunt.config('coffeelint.all', [filepath])
@@ -61,22 +65,29 @@ module.exports = (grunt) ->
       grunt.regarde = changed: ['test.js'])
 
   grunt.loadNpmTasks('grunt-contrib-watch'){% if (browser) { %}
-  grunt.loadNpmTasks('grunt-contrib-livereload'){% } %}
+  grunt.loadNpmTasks('grunt-contrib-livereload')
+  grunt.loadNpmTasks('grunt-contrib-uglify'){% } %}
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-coffeelint')
   grunt.loadNpmTasks('grunt-coffee-build')
   grunt.loadNpmTasks('grunt-mocha-debug'){% if (!isPrivate) { %}
   grunt.loadNpmTasks('grunt-release'){% } %}
 
-  grunt.registerTask('build', [
+  grunt.registerTask('test', [
+    'coffeelint'{% if (nodejs) { %}
+    'coffee_build:nodejs'{% } %}{% if (browser) { %}
+    'coffee_build:browser'{% } %}
+    'mocha_debug'
+  ])
+
+  grunt.registerTask('rebuild', [
+    'clean'
     'coffeelint'
     'coffee_build'
-    'mocha_debug'
-  ]){% if (!isPrivate) { %}
-  grunt.registerTask('publish', ['clean', 'build', 'release']){% }%}
-
-  grunt.registerTask('default', [
-    'build'{% if (browser) { %}
-    'livereload-start'{% } %}
-    'watch'
+    'mocha_debug'{% if (browser) { %}
+    'uglify'{% } %}
   ])
+  {% if (!isPrivate) { %}
+  grunt.registerTask('publish', ['rebuild', 'release'])
+  {% }%}
+  grunt.registerTask('default', ['test'{% if (browser) { %}, 'livereload-start'{% } %}, 'watch'])

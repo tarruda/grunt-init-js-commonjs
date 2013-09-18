@@ -112,6 +112,7 @@ exports.template = (grunt, init, done) ->
 
       if props.browser
         pkg.devDependencies['grunt-contrib-livereload'] = '~0.1.2'
+        pkg.devDependencies['grunt-contrib-uglify'] = '~0.2.4'
 
       if not props.isPrivate
         pkg.devDependencies['grunt-release'] = '~0.5.1'

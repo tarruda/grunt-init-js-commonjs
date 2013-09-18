@@ -3,6 +3,7 @@
 > {%= description %} 
 
 ## Installation
+
 ```shell
 npm install {%= name %}
 ```
@@ -10,6 +11,7 @@ npm install {%= name %}
 ### Development
 
 Ensure grunt-cli exists in your $PATH:
+
 ```sh
 npm install -g grunt-cli
 ```
@@ -30,5 +32,5 @@ necessary to rebuild after install. Eg:
 npm install {%= repository %}#master
 cd node_modules/{%= name %}
 npm install
-grunt clean build
+grunt rebuild
 ```
