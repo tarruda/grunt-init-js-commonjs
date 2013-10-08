@@ -1,5 +1,5 @@
-require('source-map-support').install()
-global.expect = require('chai').expect
+global.expect = require('chai').expect{% if (browser || coffeescript) { %}
+require('source-map-support').install(){% } %}
 
 ###
  The object passed to 'run' will be processed similarly to mocha exports

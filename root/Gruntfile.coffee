@@ -5,8 +5,7 @@ module.exports = (grunt) ->
     coffeelint:
       options: grunt.file.readJSON('.coffeelintrc')
     {% } else { %}
-    jshint:
-      options: jshintrc: '.jshintrc'{% } %}
+    exec_jshint:{% } %}
       all: ['Gruntfile{%= ext %}', 'src/**/*{%= ext %}', 'test/**/*{%= ext %}']
     {% if (browser || coffeescript) { %}
     coffee_build:
@@ -60,20 +59,20 @@ module.exports = (grunt) ->
     clean: ['build']
     {% } %})
   grunt.event.on('watch', (action, filepath) ->
-    grunt.config('{%= coffeescript ? "coffeelint" : "jshint" %}.all', [filepath])
     grunt.regarde = changed: ['test.js'])
 
   grunt.loadNpmTasks('grunt-contrib-watch'){% if (browser) { %}
   grunt.loadNpmTasks('grunt-contrib-livereload')
   grunt.loadNpmTasks('grunt-contrib-uglify'){% } if (browser || coffeescript) { %}
   grunt.loadNpmTasks('grunt-contrib-clean'){% } %}
-  grunt.loadNpmTasks('grunt-{%= coffeescript ? "coffeelint" : "contrib-jshint" %}'){% if (browser || coffeescript) { %}
+  grunt.loadNpmTasks('grunt-{%= coffeescript ? "coffeelint" : "exec-jshint" %}'){% if (browser || coffeescript) { %}
   grunt.loadNpmTasks('grunt-coffee-build'){% } %}
-  grunt.loadNpmTasks('grunt-mocha-debug'){% if (!isPrivate) { %}
+  grunt.loadNpmTasks('grunt-mocha-debug')
+  grunt.loadNpmTasks('grunt-newer'){% if (!isPrivate) { %}
   grunt.loadNpmTasks('grunt-release'){% } %}
 
   grunt.registerTask('test', [
-    '{%= coffeescript ? "coffeelint" : "jshint" %}'{% if (browser || coffeescript) { if (nodejs && coffeescript) { %}
+    'newer:{%= coffeescript ? "coffeelint" : "exec_jshint" %}'{% if (browser || coffeescript) { if (nodejs && coffeescript) { %}
     'coffee_build:nodejs'{% } if (browser) { %}
     'coffee_build:browser'{% }} %}
     'mocha_debug'
@@ -81,7 +80,7 @@ module.exports = (grunt) ->
   {% if (browser || coffeescript) { %}
   grunt.registerTask('rebuild', [
     'clean'
-    '{%= coffeescript ? "coffeelint" : "jshint" %}'
+    'newer:{%= coffeescript ? "coffeelint" : "exec_jshint" %}'
     'coffee_build'
     'mocha_debug'{% if (browser) { %}
     'uglify'{% } %}

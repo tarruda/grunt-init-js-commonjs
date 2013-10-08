@@ -12,7 +12,8 @@ npm install --save {%= name %}
 
 ## Development
 
-Clone, install dependencies and run tests when a file changes:
+Clone, install dependencies and re-test whenever some file is modified:
+
 ```sh
 git clone {%= repository %}
 cd {%= name %}
@@ -27,5 +28,4 @@ npm install {%= name %}
 cd node_modules/{%= name %}
 npm install
 grunt rebuild
-```
-{% } %}
+```{% } %}

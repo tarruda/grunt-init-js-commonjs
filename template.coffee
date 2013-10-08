@@ -45,7 +45,6 @@ toBoolean = (answer) -> answer == 'Y/n' or /^y$/i.test(answer)
 
 
 jshintDefaults =
-  globals: expect: false, run: false
   curly: true
   eqeqeq: true
   immed: true
@@ -58,6 +57,11 @@ jshintDefaults =
   eqnull: true
   node: true
   browser: true
+  debug: true
+
+
+jshintTestDefaults =
+  globals: expect: false, run: false
   expr: true
 
 
@@ -164,6 +168,8 @@ exports.template = (grunt, init, done) ->
         JSON.stringify(coffeelintDefaults, null, 2))
     else
       grunt.file.write('.jshintrc', JSON.stringify(jshintDefaults, null, 2))
+      grunt.file.write('test/.jshintrc',
+        JSON.stringify(jshintTestDefaults, null, 2))
 
     init.writePackageJSON('package.json', props, (pkg) =>
       if props.coffeescript
@@ -175,20 +181,21 @@ exports.template = (grunt, init, done) ->
         pkg.private = true
 
       pkg.devDependencies =
+        'chai': '~1.7.2'
         'grunt': '~0.4.1'
         'grunt-contrib-watch': '~0.5.3'
         'grunt-mocha-debug': '~0.0.6'
-        'chai': '~1.7.2'
-        'source-map-support': '~0.2.3'
+        'grunt-newer': '~0.5.4'
 
       if props.coffeescript or props.browser
         pkg.devDependencies['grunt-coffee-build'] = '~1.4.9'
         pkg.devDependencies['grunt-contrib-clean'] = '~0.5.0'
+        pkg.devDependencies['source-map-support'] = '~0.2.3'
 
       if props.coffeescript
         pkg.devDependencies['grunt-coffeelint'] = '~0.0.7'
       else
-        pkg.devDependencies['grunt-contrib-jshint'] = '~0.6.4'
+        pkg.devDependencies['grunt-exec-jshint'] = '~0.0.0'
 
       if props.browser
         pkg.devDependencies['grunt-contrib-livereload'] = '~0.1.2'
