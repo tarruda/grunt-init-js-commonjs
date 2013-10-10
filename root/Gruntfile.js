@@ -1,3 +1,32 @@
+// Browsers/platform to test with saucelabs
+var browsers = [{
+  browserName: "internet explorer",
+  platform: "XP",
+  version: "7"
+}, {
+  browserName: "internet explorer",
+  platform: "WIN7",
+  version: "8"
+}, {
+  browserName: "internet explorer",
+  platform: "WIN7",
+  version: "9"
+}, {
+  browserName: "internet explorer",
+  platform: "WIN7",
+  version: "10"
+}, {
+  browserName: "firefox",
+  platform: "WIN7"
+}, {
+  browserName: "chrome",
+  platform: "WIN7"
+}, {
+  browserName: "opera",
+  platform: "WIN7"
+}];
+
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
@@ -47,6 +76,20 @@ module.exports = function(grunt) {
       }
     },
 
+    'saucelabs-mocha': {
+      all: {
+        options: {
+          urls: ["http://127.0.0.1:8000"],
+          tunnelTimeout: 5,
+          build: process.env.TRAVIS_JOB_ID,
+          concurrency: 3,
+          browsers: browsers,
+          testname: "<%= name %>",
+          tags: ["master"]
+        }
+      }
+    },
+
     watch: {
       options: {
         nospawn: true
@@ -72,6 +115,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-release');
   grunt.loadNpmTasks('grunt-exec-jshint');
+  grunt.loadNpmTasks('grunt-saucelabs');
 
   grunt.registerTask('test', [
     'newer:exec_jshint',
@@ -87,5 +131,6 @@ module.exports = function(grunt) {
   ]);
   {% if (!isPrivate) { %}
   grunt.registerTask('publish', ['rebuild', 'release']);{% } %}
+  grunt.registerTask('ci', ['test', 'saucelabs-mocha']);
   grunt.registerTask('default', ['test', 'livereload-start', 'watch']);
 };

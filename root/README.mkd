@@ -20,11 +20,3 @@ cd {%= name %}
 npm install
 grunt
 ```
-To install and use a development branch it will be necessary to build manually:
-
-```sh
-npm install {%= name %}
-cd node_modules/{%= name %}
-npm install
-grunt rebuild
-```

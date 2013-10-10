@@ -102,5 +102,7 @@ exports.template = (grunt, init, done) ->
       if props.nodejs
         pkg.engines = node: '>= 0.8.0'
 
+      pkg.scripts = test: 'grunt ci'
+
       return pkg
     ))
