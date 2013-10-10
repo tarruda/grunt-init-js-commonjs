@@ -27,7 +27,7 @@ toBoolean = (answer) -> answer == 'Y/n' or /^y$/i.test(answer)
 
 
 jshintDefaults =
-  curly: true
+  curly: false
   eqeqeq: true
   immed: true
   latedef: true
