@@ -44,7 +44,8 @@ module.exports = (grunt) ->
         sourceMapIn: 'build/browser/<%= pkg.name %>.js.map'
         sourceMap: 'build/browser/<%= pkg.name %>.min.js.map'
       files:
-        'build/browser/<%= pkg.name %>.min.js': ['build/browser/<%= pkg.name %>.js']
+        'build/browser/<%= pkg.name %>.min.js':
+          ['build/browser/<%= pkg.name %>.js']
     {% } %}
     watch:
       options:

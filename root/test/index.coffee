@@ -1,13 +1,17 @@
-global.expect = require('chai').expect{% if (browser || coffeescript) { %}
-require('source-map-support').install(){% } %}
+assert = require('assert')
+
+for k, v of assert
+  global[k] = v
+
+{% if (browser || coffeescript) { %}require('source-map-support').install(){% } %}
 
 ###
- The object passed to 'run' will be processed similarly to mocha exports
+ The object passed to 'runMocha' will be processed similarly to mocha exports
  interface, the difference is that its possible to prefix test/suite names with
  'only:' and 'skip:' to isolate/skip that test/suite.
 ###
 
-run(
+runMocha(
   'Suite':
     before: (done) ->
       @t = require('../src')
@@ -15,11 +19,11 @@ run(
 
 
     'test': ->
-      expect(@t).to.be.true
+      ok(@t)
 
 
     'AsyncSuite':
       'async test': (done) ->
-        expect(@t).to.be.true
+        ok(@t)
         done()
 )

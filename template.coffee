@@ -181,10 +181,9 @@ exports.template = (grunt, init, done) ->
         pkg.private = true
 
       pkg.devDependencies =
-        'chai': '~1.7.2'
         'grunt': '~0.4.1'
         'grunt-contrib-watch': '~0.5.3'
-        'grunt-mocha-debug': '~0.0.6'
+        'grunt-mocha-debug': '~0.0.8'
         'grunt-newer': '~0.5.4'
 
       if props.coffeescript or props.browser
