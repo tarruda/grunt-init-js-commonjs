@@ -1,13 +1,13 @@
 assert = require('assert');
 
 
-for (var k in assert) global[k] = v;
+for (var k in assert) global[k] = assert[k];
 
 
 runMocha({
   'Suite': {
     before: function(done) {
-      this.t = require('../src');
+      this.t = require('../lib');
       done();
     },
 
