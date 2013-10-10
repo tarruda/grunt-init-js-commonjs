@@ -84,7 +84,7 @@ module.exports = function(grunt) {
           build: process.env.TRAVIS_JOB_ID,
           concurrency: 3,
           browsers: browsers,
-          testname: "<%= name %>",
+          testname: "<%= pkg.name %>",
           tags: ["master"]
         }
       }
