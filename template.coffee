@@ -92,7 +92,7 @@ exports.template = (grunt, init, done) ->
         'grunt-contrib-livereload': '~0.1.2'
         'grunt-mocha-debug': '~0.0.8'
         'grunt-newer': '~0.5.4'
-        'powerbuild': '~0.0.7'
+        'powerbuild': '~0.0.8'
         'grunt-saucelabs': '~4.1.2'
         'grunt-exec-jshint': '~0.0.0'
 
