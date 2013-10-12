@@ -2,6 +2,13 @@
 
 > {%= description %}
 
+#### Node.js:
+[![Build Status](https://travis-ci.org/{%= username %}/{%= name %}.png)](https://travis-ci.org/{%= username %}/{%= name %})
+
+#### Browsers:
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/{%= username %}_{%= name %}.svg)](https://saucelabs.com/u/{%= username %}_{%= name %})
+
+
 ## Installation
 
 ```sh
