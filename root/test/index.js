@@ -7,7 +7,7 @@ for (var k in assert) global[k] = assert[k];
 runMocha({
   'Suite': {
     before: function(done) {
-      this.t = require('../lib');
+      this.t = require('../');
       done();
     },
 

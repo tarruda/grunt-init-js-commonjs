@@ -80,7 +80,7 @@ exports.template = (grunt, init, done) ->
       JSON.stringify(jshintTestDefaults, null, 2))
 
     init.writePackageJSON('package.json', props, (pkg) =>
-      pkg.main = './lib/index'
+      pkg.main = './index'
 
       if props.isPrivate
         pkg.private = true
