@@ -33,7 +33,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     exec_jshint: {
-      all: ['lib/**/*.js', 'test/**/*.js']
+      all: ['Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js']
     },
 
     powerbuild: {
@@ -47,11 +47,11 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          export: 'lib/index.js',
+          export: 'index.js',
           compress: true
         },
         files: [
-          { src: 'lib/index.js', dest: 'build/<%= pkg.name %>.min.js' }
+          { src: 'index.js', dest: 'build/<%= pkg.name %>.min.js' }
         ]
       }
     },
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
       },
       nodejs: {
         options: {
-          src: ['lib/**/*.js', 'test/**/*.js']
+          src: ['index.js', 'lib/**/*.js', 'test/**/*.js']
         }
       },
       browser: {
