@@ -59,7 +59,7 @@ module.exports = function(grunt) {
     mocha_debug: {
       options: {
         reporter: 'dot',
-        check: ['lib/**/*.js', 'test/**/*.js']
+        check: ['index.js', 'lib/**/*.js', 'test/**/*.js']
       },
       nodejs: {
         options: {
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
         nospawn: true
       },
       all: {
-        files: ['Gruntfile.js', '*.js', 'lib/**/*.js', 'test/**/*.js'],
+        files: ['Gruntfile.js', 'index.js', 'lib/**/*.js', 'test/**/*.js'],
         tasks: ['test', 'livereload']
       }
     },
