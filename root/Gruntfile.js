@@ -94,7 +94,7 @@ module.exports = function(grunt) {
         nospawn: true
       },
       all: {
-        files: ['Gruntfile.coffee', 'lib/**/*.js', 'test/**/*.js'],
+        files: ['Gruntfile.js', '*.js', 'lib/**/*.js', 'test/**/*.js'],
         tasks: ['test', 'livereload']
       }
     },
